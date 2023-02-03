@@ -1,5 +1,14 @@
+# Quick Start
 
 
+# Mainnet
+* [Snapshot](https://github.com/Vgk88/cyberG-identity/blob/main/Jackal.md#stop-the-service-and-reset-the-data)
+* [State Sync](https://github.com/Vgk88/cyberG-identity/blob/main/Jackal.md#state-sync-mainnet)
+
+# Testnet 
+* [Snapshot](https://github.com/Vgk88/cyberG-identity/blob/main/Jackal.md#snapshot-testnet)
+* [State Sync](https://github.com/Vgk88/cyberG-identity/blob/main/Jackal.md#state-sync-testnet)
+* 
 ## Snapshot Mainnet
 
 ### Stop the service and reset the data
