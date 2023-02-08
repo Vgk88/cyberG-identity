@@ -1,5 +1,5 @@
 # Mainnet
-* [Snapshot](https://github.com/Vgk88/cyberG-identity/Teritori.md#snapshot-mainnet)
+* [Snapshot](https://github.com/Vgk88/cyberG-identity/blob/main/Teritori.md#snapshot-mainnet)
 * [State Sync](https://github.com/Vgk88/cyberG-identity/Teritori.md#state-sync-mainnet)
 
 ## Snapshot Mainnet
