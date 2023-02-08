@@ -20,7 +20,7 @@ http://65.108.41.172:19657
 ### Download latest snapshot
 ```
 cd $HOME/.teritorid/
-wget http://65.108.41.172:8000/Snapshot_Jackal-test.tar.gz -O - | tar -xz
+wget http://65.108.41.172:8000/Snapshot_teritori-main.tar.gz -O - | tar -xz
 mv $HOME/.teritorid/priv_validator_state.json.backup $HOME/.teritorid/data/priv_validator_state.json
 rm $HOME/.teritorid/Snapshot_teritori-main.tar.gz
 ```
