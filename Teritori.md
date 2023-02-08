@@ -85,3 +85,62 @@ sudo systemctl restart $Name_service
 journalctl -fu $Name_service -o cat
 
 ```
+## State Sync Testnet
+
+### RPC
+```
+http://135.181.138.160:46657
+```
+
+<details>
+  <summary><b>Pruning</b></summary>
+
+```
+# Prune Type
+pruning = "custom"
+
+# Prune Strategy
+pruning-keep-every = 0
+
+# State-Sync Snapshot Strategy
+snapshot-interval = 10
+snapshot-keep-recent = 100
+```
+</details>
+
+```
+SNAP_RPC="http://135.181.138.160:46657"
+Name_bin="teritorid"
+Name_config_file=".teritorid"
+Name_service="teritorid"
+peers="31413c99357d0cfc48a46767ade171db2ea0205e@135.181.138.160:46656"
+```
+
+```
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash) && \
+echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
+s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/$Name_config_file/config/config.toml
+
+```
+
+```
+sudo systemctl stop $Name_service && $Name_bin tendermint unsafe-reset-all --home $HOME/$Name_config_file --keep-addr-book
+
+```
+
+```
+sed -i.bak -e  "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/$Name_config_file/config/config.toml
+
+```
+
+```
+sudo systemctl restart $Name_service
+journalctl -fu $Name_service -o cat
+
+```
